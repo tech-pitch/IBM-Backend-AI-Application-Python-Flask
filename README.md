@@ -57,9 +57,3 @@ Contributions are welcome! Please feel free to submit pull requests, or open iss
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
 
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
