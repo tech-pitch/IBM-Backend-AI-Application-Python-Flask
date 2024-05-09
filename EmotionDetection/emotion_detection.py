@@ -21,27 +21,21 @@ def get_emotion(text_to_analyze):
         return str(e)  # Return the exception message as a string
 
 def emotion_detector(text_to_analyze):
-    emotion_response = get_emotion(text_to_analyze)  # This function must be defined elsewhere as you're using it here.
+    if not text_to_analyze.strip():  # Check if the input is blank or just whitespace
+        return {'anger': None, 'disgust': None, 'fear': None, 'joy': None, 'sadness': None, 'dominant_emotion': None}
+    
+    # Existing code to process text and determine emotions
+    response = get_emotion(text_to_analyze)  # Assuming this is a function call that returns emotion analysis data
 
-    emotion_predictions = emotion_response.get("emotionPredictions")  # Use .get() to avoid KeyError if the key is not found.
-
-    if emotion_predictions:  # Check if the list is not empty.
-        # Access the first item's 'emotion' dictionary.
-        first_prediction_emotions = emotion_predictions[0]['emotion']  
-        # Determine the dominant emotion
-        dominant_emotion = max(first_prediction_emotions, key=first_prediction_emotions.get)  # Finds the key with the highest value
-
-        responses = {
-            'anger': first_prediction_emotions['anger'],
-            'disgust': first_prediction_emotions['disgust'],
-            'fear': first_prediction_emotions['fear'],
-            'joy': first_prediction_emotions['joy'],
-            'sadness': first_prediction_emotions['sadness'],
-            'dominant_emotion': dominant_emotion
-        }
-
-        return responses
+    emotion_predictions = response.get("emotionPredictions")
+    if emotion_predictions:
+        first_prediction_emotions = emotion_predictions[0]['emotion']
+        dominant_emotion = max(first_prediction_emotions, key=first_prediction_emotions.get) if first_prediction_emotions else None
+        emotions = {key: first_prediction_emotions.get(key, None) for key in first_prediction_emotions}
+        emotions['dominant_emotion'] = dominant_emotion
+        return emotions
     else:
-        return {}  # Return an empty dictionary if there are no predictions.
+        return {'anger': None, 'disgust': None, 'fear': None, 'joy': None, 'sadness': None, 'dominant_emotion': None}
+
 
     
