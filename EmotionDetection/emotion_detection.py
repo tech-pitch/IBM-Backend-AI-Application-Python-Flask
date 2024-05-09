@@ -20,7 +20,7 @@ def get_emotion(text_to_analyze):
     except requests.RequestException as e:
         return str(e)  # Return the exception message as a string
 
-def get_emotion_scores(text_to_analyze):
+def emotion_detector(text_to_analyze):
     emotion_response = get_emotion(text_to_analyze)  # This function must be defined elsewhere as you're using it here.
 
     emotion_predictions = emotion_response.get("emotionPredictions")  # Use .get() to avoid KeyError if the key is not found.
